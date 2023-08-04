@@ -1,0 +1,87 @@
+# Tehtävä 4: Datan mallintaminen (Modeling)
+
+* Miten mallintaisit datan?
+  * esim. regressiomalli tai vastaava koneoppimismalli - tässä yksinkertainen regressiomalli on hyvä vaihtoehto
+  * esim. slearn.linear_model.LogisticRegression tai LinearRegression
+  * Myös luokitteleva koneoppimismalli on hyvä vaihtoehto (tekniikoina voi olla esim. päätöspuut tai satunnaismetsä)
+  * Luokittelua tehtäessä pitää päättää, että mitä ja miten luokitellaan
+  * Eri koneoppimismallien välisen keskinäisen vertailun tarjoaa mm. SKlearn ja pipeline.
+* Millä tavalla päästään haluamaasi lopputavoitteeseen?
+  * toteutus tehokkuussyistä käyttäen valmiita koneoppimiskirjastoja/algoritmejä
+  * koneoppimiskirjaston algoritmejä "tuunataan" eli muutetaan algoritmin syöttöparametrejä
+  * kaikki data muutettava numeeriseksi ennen koneoppimisvaihetta
+  * skaalaus datalle (tehdään useimmiten normaalijakaumaan) tehdään ennen koneoppimisvaihetta
+  * mahdollisesti ryhmittelemällä kohteet keskikulutuksen mukaan erilaisiin "kiinteistötyyppeihin"
+* Regressio? Ennustaminen? Luokittelu?
+  * kulutusta voidaan ennustaa historian perusteella, kuten esim. aiempien vuosien saman ajanjakson kulutuksen perusteella
+  * luokittelussa voidaan pyrkiä erottamaan erilaisia jakelukohteita kulutuksen perusteella
+  * regressiomalli saattaa olla hyvin toimiva koneoppimisen malli tässä tilanteessa (ainakin se toimiessaan harvoin ylioppii)
+* Ryhmittely? Ryhmien tunnistaminen datasta?
+  * Koulutus- ja Testidatan erotuksen tekeminen, jakaminen esim. suhteilla 70-30%, 80-20%
+  * Datan ryhmittely esim. jakelualueen (DMA) mukaan
+  * Datan ryhmittely kohteen kulutuksen perusteella, jolloin pitää määritellä kulutusluokat ja niille rajat
+* Kuvaile Mitä tämän jälkeen tapahtuu CRISP-DM -mallin mukaan (pääpiirteissään)
+  * ajetaan koneoppimismallin ja vertaillaan tuloksia
+  * sekä kehittäjät että vesilaitoksen edustajat tarkastelevat saatuja tuloksia yhdessä -> sovitaan tarvittavat jatkotoimenpiteet
+  * tuloksien tarkastelussa pyritään arvioimaan, että saavutettiinko asetettu tavoite vai ei
+  * asiakkaan palaute kerätään ja parannetaan mallia vastaamaan asiakkaan toiveita
+  * todennäköisesti seuraavaksi tehdään uusi iteraatiokierros CRISP-DM -mallin mukaisesti
+* Havaintojen tueksi voi liittää kuvia/koodia datasta
+  * havainnolliset kuvat, joissa dataa on ryhmitelty tai laskettu esim. keskiarvoja, ovat erityisen hyviä
+  * poikkeamien visualisointi (esim. viiksikaavio) tärkeää
+
+
+# Tehtävä 5: Tulosten arviointi (Evaluation / Deployment)
+
+Tehtävässä arvioidaan kaksi osaa:
+
+### 5.1: Projektin tulosten arviointi
+
+projektin tulosten arviointi? Käyttöönoton vaiheet?
+
+-------------
+Projektin tulosten arviointi
+* Esitellään tiivistetysti projektin keskeiset tulokset
+  * Tulosten esittely tässä vaiheessa
+* Millaiseksi arvioitte projektin tulokset tässä vaiheessa?
+  * Tässä tehtävässä esiteltiin tulokset, mitä ryhmä oli saanut selville
+  * Keskeistä oli tutustua data-analysointiprojektiin sekä CRISP-DM prosessimalliin
+  * Lisämausteena Jupyter Notebook ja Gitlab välineet-
+* Kuinka helppoa tästä on jatkaa kohti toteutusta?
+  * Pohjatyöt on tehty, koska aikaa käytetty paljon datan tutkimiseen ja analysointiin
+  * Kun data on hyvälaatuista, niin koneoppimismalleja voi soveltaa ja vertailla nopeastikin
+  * tuloksia ja niiden analysointia kannattaa jatkaa yrityksen edustajien kanssa
+* Ketkä saatuja tuloksia arvioivat, jos halutaan, että projektille saataisiin rahoitus?
+  * yrityksen johto
+  * yrityksen sidosryhmät ja jopa asiakkaat
+  * myös tutkimusorganisaatiot voivat rahoittaa projektia
+* Miten osoittaisit projektin hyödyn liiketoiminnalle?
+  * voitaisiin datan perusteella havaita ongelmat, kuten vuodot tai tukokset, reaaliaikaisesti
+  * kuluttajat voivat saada datasta visuaalisesti hyviä yhteenvetoja ja jopa vaikuttaa heidän vedenkulutukseensa
+* Mitä toimenpiteitä suosittelisitte konsultin roolissa asiakasyritykselle?
+  * dataa voi kerätä monipuolisemmin
+  * kyselytutkimuksen datan voisi yhdistää kulutusdataan (toki GDPR pitää huomioita)
+  * mahdollisimman reaaliaikainen datankeruu
+  * ennustaminen historiallisen datan pohjalta
+
+Käyttöönoton vaiheet:
+
+* Millaiset työkalut tarvitaan tuotetun järjestelmän käyttöönottoon
+  * koneoppimismallin ajamisen valmistelu, siihen liittyy jako opetus/testijoukkoon + validointi.
+  * valitaan alustavasti, millaisia koneoppimismenetelmiä mahdollisesti käytetään.
+* Miten järjestelmä otettaisiin käyttöön?
+  * Mallit voidaan suorittaa verkossa Web Service-palveluna tavanomaisella web -palvelimella
+  * riittävät tehokkaat ajoympäristöt: pilvipalvelun käyttöönoton pohdinta hyvä lisä
+  * ehkä jopa supertietokoneen tasoinen tietokone, koska kyseessä on hyvin laskentaintensiivistä toimintaa
+* Miten järjestelmän ylläpito järjestetään? Kuinka mahdolliset virheet ja ongelmatilanteet korjataan?
+  * Ylläpito tulee olla jatkuvaa
+  * järjestelmän ylläpitoa varten tulee olla omaa henkilöstöä tai konsulttiyhtiö, joka hoitaa työn tuntilaskutuksena
+  * Virheiden raportointi ja sopimus siitä, kuinka virheet korjataan
+  * Liiketoiminnan tavoitteiden ja datan muuttuessa on mallinnusta päivitettävä vastaavasti (tarvitaan uusi CRISP-DM -iteraatiokierros).
+  * Kaikki testit ja testitulokset dokumentoidaan, vaikka joku malli hylättäisiin - se saattaa tulla käyttökelpoiseksi myöhemmin, kun data on riittävän laadukasta.
+
+Jupyter Notebook -päivitykset
+  * enemmän tilastollisia kuvioita, kuten keskikulutusta eri ajanjaksoilla
+  * Kyselytutkimuksen dataa myös käsitelty joissain harjoitustöissä, esim. tilastolliset arvot sekä korrelaatiot
+  * regressiokaaviot tai -mallit myös mahdollisia ainakin kokeilumielessä
+
